@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayurvedic Health & Prakriti Analysis</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="nav-logo">Ayur Health</h1>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#profile">Profile</a></li>
+                <li><a href="#analysis">Prakriti Test</a></li>
+                <li><a href="#diet">Diet Chart</a></li>
+                <li><a href="#schedule">Daily Schedule</a></li>
+                <li><a href="#admin" id="admin-link" style="display:none;">Admin</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="container">
+                <div class="hero">
+                    <div class="hero-content">
+                        <h1>Discover Your Ayurvedic Constitution</h1>
+                        <p>Personalized health recommendations based on ancient Ayurvedic wisdom</p>
+                        <div class="hero-orbs">
+                            <div class="orb orb-1"></div>
+                            <div class="orb orb-2"></div>
+                            <div class="orb orb-3"></div>
+                        </div>
+                        <button class="btn-primary" onclick="showSection('profile')">✨ Begin Your Journey</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- User Profile Section -->
+        <section id="profile" class="section">
+            <div class="container">
+                <h2>User Profile</h2>
+                <form id="profile-form" class="form">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Age</label>
+                            <input type="number" id="age" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Gender</label>
+                            <select id="gender" required>
+                                <option value="">Select</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Height (cm)</label>
+                            <input type="number" id="height" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Weight (kg)</label>
+                            <input type="number" id="weight" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Health Conditions</label>
+                        <textarea id="health-conditions" placeholder="Any existing health conditions or concerns"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Lifestyle</label>
+                        <select id="lifestyle" required>
+                            <option value="">Select</option>
+                            <option value="sedentary">Sedentary</option>
+                            <option value="moderate">Moderately Active</option>
+                            <option value="active">Very Active</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-primary">Save Profile</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Prakriti Analysis Section -->
+        <section id="analysis" class="section">
+            <div class="container">
+                <h2>Prakriti Analysis</h2>
+                <div id="questionnaire">
+                    <div class="question-counter">
+                        <span id="current-question">1</span> / <span id="total-questions">15</span>
+                    </div>
+                    <div id="question-container">
+                        <h3 id="question-text"></h3>
+                        <div id="options-container"></div>
+                        <div class="question-nav">
+                            <button id="prev-btn" class="btn-secondary" onclick="previousQuestion()">Previous</button>
+                            <button id="next-btn" class="btn-primary" onclick="nextQuestion()">Next</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="results" style="display:none;">
+                    <h3>Your Prakriti Result</h3>
+                    <div id="prakriti-result"></div>
+                    <button class="btn-primary" onclick="showSection('diet')">View Diet Recommendations</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Diet Chart Section -->
+        <section id="diet" class="section">
+            <div class="container">
+                <h2>Personalized Diet Chart</h2>
+                <div id="diet-recommendations">
+                    <div class="diet-card">
+                        <h3>Recommended Foods</h3>
+                        <div id="recommended-foods"></div>
+                    </div>
+                    <div class="diet-card">
+                        <h3>Foods to Avoid</h3>
+                        <div id="avoid-foods"></div>
+                    </div>
+                    <div class="diet-card">
+                        <h3>Meal Plan</h3>
+                        <div id="meal-plan"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Daily Schedule Section -->
+        <section id="schedule" class="section">
+            <div class="container">
+                <h2>Daily Routine</h2>
+                <div id="daily-schedule">
+                    <div class="schedule-card">
+                        <h3>Morning Routine</h3>
+                        <div id="morning-routine"></div>
+                    </div>
+                    <div class="schedule-card">
+                        <h3>Afternoon Activities</h3>
+                        <div id="afternoon-routine"></div>
+                    </div>
+                    <div class="schedule-card">
+                        <h3>Evening Routine</h3>
+                        <div id="evening-routine"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Panel Section -->
+        <section id="admin" class="section">
+            <div class="container">
+                <h2>Admin Panel</h2>
+                <div class="admin-login" id="admin-login">
+                    <form id="admin-login-form">
+                        <div class="form-group">
+                            <label>Admin Password</label>
+                            <input type="password" id="admin-password" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Login</button>
+                    </form>
+                </div>
+                <div class="admin-dashboard" id="admin-dashboard" style="display:none;">
+                    <div class="admin-stats">
+                        <div class="stat-card">
+                            <h3>Total Users</h3>
+                            <span id="total-users">0</span>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Completed Tests</h3>
+                            <span id="completed-tests">0</span>
+                        </div>
+                    </div>
+                    <div class="user-list">
+                        <h3>User Management</h3>
+                        <div id="users-table"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Follow-up Modal -->
+    <div id="followup-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Follow-up Reminder</h3>
+            <p>How are you feeling with your current routine?</p>
+            <form id="followup-form">
+                <div class="form-group">
+                    <label>Energy Level (1-10)</label>
+                    <input type="range" id="energy-level" min="1" max="10" value="5">
+                    <span id="energy-value">5</span>
+                </div>
+                <div class="form-group">
+                    <label>Sleep Quality (1-10)</label>
+                    <input type="range" id="sleep-quality" min="1" max="10" value="5">
+                    <span id="sleep-value">5</span>
+                </div>
+                <div class="form-group">
+                    <label>Additional Comments</label>
+                    <textarea id="followup-comments"></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Submit Feedback</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
